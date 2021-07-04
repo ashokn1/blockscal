@@ -5,11 +5,16 @@ import 'classmap.dart';
 
 
 class BlockInfo {
+  static const List<String> blockPrefixes = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
+  static const int blocksPerPrefix = 4;
+  
+
   final String blockName;
   final DateTime startTime;
   final DateTime endTime;
   final int durationMinutes;
   final bool allDay;
+
   final Map<String, Map<bool, List<Color>>> _blockColors = {
     'A': {
       true:  [Colors.white, Colors.brown[700]!],

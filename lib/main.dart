@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-//import 'package:firebase_core/firebase_core.dart';
-//import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:http/http.dart' as http;
 import 'package:editable/editable.dart';
 import 'dart:async';
@@ -55,8 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   PageController _blockPageController = PageController();
 
-  //firebase_storage.FirebaseStorage storage =
-  //firebase_storage.FirebaseStorage.instance;
+  firebase_storage.FirebaseStorage storage =
+  firebase_storage.FirebaseStorage.instance;
 
   Blocks blockList = new Blocks();
   ClassMap classMap = new ClassMap();
@@ -81,15 +81,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> _futureWaitTwoSeconds() {
     return Future.delayed(Duration(seconds: 2), () => print('WaitTwoSeconds'));
   }
-
+  
   Future<void> _futureLoadBlockListAsset() async {
     if (!blockList.blockInfoParsed) {
       var jsonText = await DefaultAssetBundle.of(context).loadString(blockListJsonSource);
       blockList.parseBlockScheduleFromJson(jsonText);
     }
   }
-
-  /*
+  
   Future<void> _futureLoadBlockListFB() async {
     if (!blockList.blockInfoParsed) {
       print("Loading blocks from FB");
@@ -101,22 +100,21 @@ class _MyHomePageState extends State<MyHomePage> {
       blockList.parseBlockScheduleFromJson(jsonText.body);
     }
   }
-  */
-
+  
   Future<void> _futureLoadOrigClassMap() async {
     if (!blockList.classMapParsed) {
       var jsonText = await DefaultAssetBundle.of(context).loadString(classMapOrigJsonSource);
       blockList.parseClassMapFromJson(jsonText);
     }
   }
-
+  
   Future<void> _futureLoadClassMap() async {
     var jsonText = await DefaultAssetBundle.of(context).loadString(classMapJsonSource);
     blockList.parseClassMapFromJson(jsonText);
     //print(classMap.classes);
     //print(classMap.blockToClassMap);
   }
-
+  
   // Builds and returns the container with
   // - today's date
   // - list of all the classes today
@@ -125,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
       padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: Column(
         children: <Widget>[
-          Padding(padding: EdgeInsets.only(bottom: 16),
+          Padding(padding: EdgeInsets.only(bottom: 16), 
             child: Container(
               alignment: Alignment.center,
               child: Text(DateFormat("EEEE MMMM d, y").format(date),
@@ -145,11 +143,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             Text(
                               list[index].allDay ? "" :
                               DateFormat.jm().format(list[index].startTime.toLocal()),
-                              style: TextStyle(fontSize: 16), textAlign: TextAlign.left),
+                              style: TextStyle(fontSize: 16), textAlign: TextAlign.left), 
                             Text(
                               list[index].allDay ? "" :
                               DateFormat.jm().format(list[index].endTime.toLocal()),
-                              style: TextStyle(fontSize: 16), textAlign: TextAlign.right),
+                              style: TextStyle(fontSize: 16), textAlign: TextAlign.right), 
                         ]),
                         (list[index].blockSubtitle != null) ?
                         Expanded(child: Column( children: <Widget>[
@@ -157,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 style: list[index].textStyle, textAlign: TextAlign.center),
                               Text(list[index].blockSubtitle!,
                                 style: list[index].textSubStyle, textAlign: TextAlign.center),
-                        ])) :
+                        ])) : 
                         Expanded(child: Text(
                             list[index].blockTitle,
                             style: list[index].textStyle, textAlign: TextAlign.center)),
@@ -184,7 +182,7 @@ class _MyHomePageState extends State<MyHomePage> {
       },
     );
   }
-
+  
   // The BlockList View.
   FutureBuilder _blockListView() {
     return FutureBuilder(
@@ -198,7 +196,7 @@ class _MyHomePageState extends State<MyHomePage> {
         } else if (snapshot.hasError) {
           // Error loading data
           return Column( children: <Widget>[
-              Padding(padding: EdgeInsets.only(top: 64),
+              Padding(padding: EdgeInsets.only(top: 64), 
                 child: Icon(Icons.error_outline, color: Colors.red, size: 60)),
               Padding(padding: EdgeInsets.only(top: 16),
                 child: Text('Error loading data', style: Theme.of(context).textTheme.headline2!),),
@@ -235,18 +233,19 @@ class _MyHomePageState extends State<MyHomePage> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return ClassMapEditor(classMap: blockList.classMap);
+        return ClassMapEditor(classMap: blockList.classMap,
+          onChanged: (value) { print("CHANGED"); });
       }
     );
   }
-
+  
   /*
   void _showClassMapList() async {
     Map<String, bool> _isEditing = new Map();
     blockList.classMap.forEach((b, c) => _isEditing[b] = false);
     String valueText = "";
     Map<String, String> _replacements = {};
-
+    
     await showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -267,7 +266,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           children: <Widget>[
                             Column( children: <Widget>[
                                 Text('${block}',
-                                  style: TextStyle(fontSize: 18), textAlign: TextAlign.left),
+                                  style: TextStyle(fontSize: 18), textAlign: TextAlign.left), 
                             ]),
                             Expanded(child: Container(
                                 padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
@@ -309,7 +308,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                       Navigator.pop(context);
                                         }) },), ], ), );
                                   } ); },
-
+                                  
                                 )
                               )
                             )
@@ -370,7 +369,7 @@ void _showClassMapTable() {
       )
     );
   }
-
+  
   void _showClassMapEditable() {
     List cols = [
       {"title": "Block", "widthFactor": 0.05, "key": "block"},
@@ -425,7 +424,7 @@ void _showClassMapTable() {
     );
   }
 */
-
+  
   AppBar calendarAppBar() {
     return AppBar(
       title: Text(widget.title),
@@ -454,11 +453,11 @@ void _showClassMapTable() {
           icon: Icon(Icons.settings_accessibility),
           onPressed: () => _showClassMapList(),
         ),
-
+        
       ]
     );
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

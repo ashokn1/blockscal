@@ -23,6 +23,16 @@ class ClassInfo {
     return ClassInfo(json['id'], json['name'], json['room'], json['blocks'].toSet(), json['notes']);
   }
 
+  String toJson() {
+    return '''
+{ 
+  "id": "${classId}", 
+  "name": "${className}", 
+  "room": "${room}", 
+  "notes": "${notes}", 
+  "blocks": ["''' + blocks.toList().join('","') + '"]\n }';
+  }
+
   factory ClassInfo.mergeClassInfos(ClassInfo first, ClassInfo second) {
     return ClassInfo(
       "", // No ID for merged classes, they aren't real
@@ -31,6 +41,11 @@ class ClassInfo {
       Set.from(first.blocks).union(second.blocks),
       first.notes + " / " + second.notes);
   }
+
+  factory ClassInfo.from(ClassInfo c) {
+    return ClassInfo(c.classId, c.className, c.room, Set.from(c.blocks), c.notes);
+  }
+      
 }
 
 class ClassMap {
@@ -62,11 +77,15 @@ class ClassMap {
     _updateBlockToClassMap();
     classMapParsed = true;
   }
-
+  
   static from(ClassMap inClassMap) {
     ClassMap classMap  = new ClassMap();
-    classMap.classes = new Map.from(inClassMap.classes);
-    classMap.blockToClassMap = new Map.from(inClassMap.blockToClassMap);
+    String cmJson = ' [ ';
+    List<String> cs = [];
+    inClassMap.classes.forEach((k, v) => cs.add(v.toJson()));
+    cmJson += cs.join(',\n ') + ']';
+    classMap.parseClassMapFromJson(cmJson);
+    classMap._updateBlockToClassMap();
     return classMap;
   }
 }
