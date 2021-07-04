@@ -1,0 +1,41 @@
+[
+    { "id": "1",
+      "name": "Transfiguration",
+      "room": "101",
+      "blocks": ["A1", "A2"],
+      "notes": "Notes"
+    },
+    
+    { "id": "2",
+      "name": "Charms",
+      "room": "201",
+      "blocks": ["B1", "B2", "B3", "B4", "E1"],
+      "notes": "Very busy class"
+    },
+    
+    { "id": "3",
+      "name": "Cryptocurrency with Elphias Doge",
+      "room": "Science 2-202",
+      "blocks": ["A3"],
+      "notes": "Notes"
+    },
+    
+    { "id": "4",
+      "name": "Dark Arts with Amycus Carrow",
+      "room": "Main 112",
+      "blocks": ["C1", "C2", "C3"],
+      "notes": "Notes"
+    },
+    
+    { "id": "5",
+      "name": "Ultra Transfiguration - Pettigrew Level",
+      "room": "101",
+      "blocks": ["A3", "A4"]
+    },
+    
+    { "id": "6",
+      "name": "Quidditch Through The Ages",
+      "room": "Field House",
+      "blocks": ["C4"]
+    }
+]    

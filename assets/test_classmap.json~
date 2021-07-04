@@ -1,0 +1,50 @@
+{
+    // Transfiguration
+    "A1": "Transfiguration",
+    "A2": "Double Transfiguration",
+    "A3": "Ultra Transfiguration - Pettigrew Level",
+    "A4": "Transfiguration: Vanishing Spells",
+
+    // Charms
+    "B1": "Charms",
+    "B2": "Double Charms",
+    "B3": "Summoning & Banishing Charms",
+    "B4": "Charms - Wingardium Leviosa",
+
+    // Herbology
+    "C1": "Herbology",
+    "C2": "Double Herbology",
+    "C3": "Herbology with the Hufflepuffs",
+    "C4": "Herbology Greenleaf Level",
+
+    // Potions
+    "D1": "Potions",
+    "D2": "Advanced Potions",
+    "D3": "Double Potions",
+    "D4": "Potions a la Bezoar",
+
+    // History of Magic
+    "E1": "History of Magic",
+    "E2":
+    "E3":
+    "E4":
+
+    // Defense Against The Dark Arts
+    "F1": "Defense Against The Dark Arts",
+    "F2": "Dark Arts with Amycus Carrow",
+    "F3": "Defense: Lockhart Level",
+    "F4": "Dueling Class",
+
+    // Astronomy
+    "G1": "Astronomy",
+    "G2": "Astronomy: Star Charts",
+    "G3": "Jupiter's Moons",
+    "G4": "Astronomy: Trelawney Level",
+
+    // Out-of-school experiences
+    "H1": "Sneaking: Dark Forest",
+    "H2": "Hiding: Chamber Of Secrets",
+    "H3": "Entering: Other House Common Rooms",
+    "H4": "Marauder's Map Level",
+}
+    
