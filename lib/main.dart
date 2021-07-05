@@ -11,6 +11,7 @@ import 'dart:convert';
 import 'blockinfo.dart';
 import 'classmap.dart';
 import 'classmap_editor.dart';
+import 'test_cmap_editor.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,11 +24,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'CalApp',
+      title: 'CalApp Test',
       theme: ThemeData(
         primarySwatch: Colors.blue ,
       ),
-      home: MyHomePage(title: 'CalApp'),
+      home: MyHomePage(title: 'CalApp New'),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -126,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Padding(padding: EdgeInsets.only(bottom: 16), 
             child: Container(
               alignment: Alignment.center,
-              child: Text(DateFormat("EEEE MMMM d, y").format(date),
+              child: Text(DateFormat("EEEE, MMMM d, y").format(date),
                 style: Theme.of(context).textTheme.headline4!,
               ),
             ),
@@ -233,8 +234,15 @@ class _MyHomePageState extends State<MyHomePage> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return ClassMapEditor(classMap: blockList.classMap,
-          onChanged: (value) { print("CHANGED"); });
+
+        return TestClassMapEditor(classMap: blockList.classMap,
+          onSaved: (value) {
+          setState(() {
+            blockList.classMap = ClassMap.from(value);
+            print("CHANGED ${value}");
+            print(blockList.classMap.classes);
+          });
+        });
       }
     );
   }

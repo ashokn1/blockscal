@@ -59,9 +59,12 @@ class ClassMap {
 
   void _updateBlockToClassMap() {
     classes.forEach((i, c) =>
-      c.blocks.forEach((b) =>
-        blockToClassMap[b] =
-        blockToClassMap.containsKey(b) ? ClassInfo.mergeClassInfos(blockToClassMap[b]!, c) : c
+      c.blocks.forEach((b) {
+        blockToClassMap[b] = c;
+        if (b == "B1") { print("UpdateBlockTo ${b} / ${c} in ${blockToClassMap}"); }
+        //blockToClassMap.containsKey(b) ? ClassInfo.mergeClassInfos(
+        //    blockToClassMap[b]!, c) : c;
+      }
     ));;
   }
   
